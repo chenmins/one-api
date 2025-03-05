@@ -105,7 +105,7 @@ func RelayTextHelper(c *gin.Context) *model.ErrorWithStatusCode {
 	}
 	// Log the final request body
 	currentTime := time.Now().Format("2006-01-02 15:04:05")
-	logger.Infof(ctx, "[%s] Final request body: %s", currentTime, bodyContent)
+	logger.Infof(ctx, "[%s] Final request body: <requestBody> %s</requestBody>", currentTime, bodyContent)
 
 	// do request
 	resp, err := adaptor.DoRequest(c, meta, requestBody)
@@ -146,11 +146,11 @@ func logResponseBody(ctx context.Context, responseBody string, isStream bool, ti
 	if isStream {
 		// For stream responses, extract content only
 		content := extractContentFromStream(responseBody)
-		logger.Infof(ctx, "[%s] Extracted content: %s", timestamp, content)
+		logger.Infof(ctx, "[%s] Extracted content:<responseBody> %s</responseBody>", timestamp, content)
 	} else {
 		// For non-stream responses, extract content
 		content := extractContentFromResponse(responseBody)
-		logger.Infof(ctx, "[%s] Extracted content: %s", timestamp, content)
+		logger.Infof(ctx, "[%s] Extracted content:<responseBody> %s</responseBody>", timestamp, content)
 	}
 }
 
